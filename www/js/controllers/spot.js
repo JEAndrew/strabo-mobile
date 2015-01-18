@@ -46,7 +46,23 @@ angular.module('app')
     { text: 'linear', value: 'linear' },
     { text: 'planar and linear', value: 'planar and linear' }
   ];
-  
+
+  // -- Begin Planar attributes --
+  // plane_type
+  // strike
+  // dip
+  // plane_quality
+  // plane_facing
+  // minor_fold_type
+  // trend
+  // plunge
+  // rake
+  // rake_azimuth
+  // lineation quality
+  // shear_sense
+  // unit_name
+  // unit_label
+
   $scope.plane_type = [
     { text: 'bedding', value: 'bedding' },
     { text: 'flow layering', value: 'flow layering' },
@@ -66,7 +82,7 @@ angular.module('app')
     { text: 'inferred(?)', value: 'inferred(?)' },
     { text: 'unknown', value: 'unknown' }
   ];
-  
+
   $scope.plane_facing = [
     { text: 'upright', value: 'upright' },
     { text: 'overturned', value: 'overturned' },
@@ -74,9 +90,40 @@ angular.module('app')
     { text: 'approximate(?)', value: 'approximate(?)' },
     { text: 'unknown', value: 'unknown' }
   ];
-    
+
+  // -- Begin Linear attributes --
+  // lineation_type
+
+  $scope.lineation_type = [
+    { text: "mineral", value: "mineral"},
+    { text: "slickenline", value: "slickenline"},
+    { text: "mullion", value: "mullion"},
+    { text: "depositional", value: "depositional"},
+    { text: "flow", value: "flow"},
+    { text: "intrusive", value: "intrusive"},
+    { text: "unknown", value: "unknown"},
+    { text: "intersection", value: "intersection"},
+    { text: "stretching", value: "stretching"},
+    { text: "rake direction of slickenline", value: "rake direction of slickenline"},
+    { text: "rodding", value: "rodding"}
+  ];
+
+  // Begin Planar & Linear attributes --
+  // plane_and_lineation_type
+  
+  $scope.plane_and_lineation_type = [
+    { text: "crenulation cleavage and lineation", value: "crenulation cleavage and lineation"},
+    { text: "foliation and lineation", value: "foliation and lineation"}
+  ];
+
+  $scope.showPlanarDetails = false;
+  $scope.showLinearDetails = false;
+  $scope.showPlanarAndLinearDetails = false;
+
   $scope.typeSelected = function() {
-    console.log($scope.spot.properties.attitude_type);
+    $scope.showPlanarDetails = (this.item.value == 'planar');
+    $scope.showLinearDetails = (this.item.value == 'linear');
+    $scope.showPlanarAndLinearDetails = (this.item.value == 'planar and linear');
   };
 
   // Get current location
@@ -138,7 +185,7 @@ angular.module('app')
     var backView = $ionicViewService.getBackView();
     backView.go();
   };
-  
+
   // Delete the spot
   $scope.deleteSpot = function() {
   $cordovaDialogs.confirm('Delete this Spot?', 'Delete', ['OK','Cancel'])
@@ -151,7 +198,7 @@ angular.module('app')
       }
     });
   }
-  
+
   // View the spot on the map
   $scope.goToSpot = function() {
     console.log($scope.spot);
