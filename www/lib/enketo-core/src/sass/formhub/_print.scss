@@ -1,0 +1,27 @@
+/** FORMHUB THEME **/
+
+// fancy radiobuttons
+.question:not(.or-appearance-label):not(.or-appearance-compact):not(.or-appearance-quickcompact) {
+    label {
+        input[type=checkbox] {
+            ~ .option-label::before {
+                content: '\e60b' !important;
+                color: black;
+            }
+            &:checked ~ .option-label::before {
+                content: '\e60c' !important;
+                color: black;
+            }
+        }
+        input[type=radio] {
+            ~ .option-label::before {
+                content: '\e607' !important;
+                color: black;
+            }
+            &:checked ~ .option-label::before {
+                content: '\e606' !important;
+                color: black;
+            }
+        }
+    }
+}
